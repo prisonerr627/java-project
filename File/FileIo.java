@@ -1,12 +1,11 @@
 package File;
 
 import Entity.*;
-import java.awt.print.Book;
 import java.io.*;
 import java.util.*;
 
 public class FileIo {
-    public static void loadFormFile(Book[] books) {
+    public static void loadFromFile(Book[] books) {
         // public → accessible from anywhere
         // static → can be called without creating an object
         // Books[] books → array where loaded books will be stored
@@ -34,8 +33,8 @@ public class FileIo {
         }
 
     }
-}
 
+    
 // This takes your list of students and writes them into the text file
     public static void saveToFile(Book[] books) {
         try {
@@ -45,7 +44,10 @@ public class FileIo {
                     writer.write(books[i].getId() + ";" + books[i].getName() + ";" + books[i].getDescription() + "\n");
                 }
             }
+            writer.close();
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
     }
+
+}
