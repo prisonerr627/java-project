@@ -1,2 +1,4 @@
 B001;Java Programming;A great coding book
 B002;Cyber Security;Offensive security guide
+32;32;43
+23;daw;adw
