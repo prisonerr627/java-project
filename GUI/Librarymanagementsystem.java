@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import Entity.*;
+import File.*;
+
 public class Librarymanagementsystem extends JFrame {
 
     Font font15 = new Font("Consolas", Font.BOLD, 15);
@@ -11,8 +14,7 @@ public class Librarymanagementsystem extends JFrame {
     JTextArea display;
     JButton addBtn, updateBtn, deleteBtn, saveBtn, clearBtn, searchBtn;
 
-
-    //Student[] students = new Student[100];
+    // Student[] students = new Student[100];
 
     public Librarymanagementsystem() {
         setTitle("Library Management System");
@@ -96,6 +98,42 @@ public class Librarymanagementsystem extends JFrame {
 
         add(panel);
         setVisible(true);
+    }
+
+
+
+    // Helper Functions
+    int getIndexById(String id) {
+        for (int i = 0; i < books.length; i++) {
+                if (books[i] != null && books[i].getId().equals(id)) {
+                    return i;
+                }
+            }
+            return -1; // Not found
+        }
+
+    int getEmptyIndex() {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void updateScreen() {
+        String content = "";
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null) {
+                // changed line here: formatting book info for the display area
+                content += "ID: " + books[i].getId() + " | Name: " + books[i].getName() + "\n";
+            }
+        }
+        // screen.setText(content);
+    }
+
+    boolean idExists(String id) {
+        return getIndexById(id) != -1;
     }
 
     public static void main(String[] args) {
