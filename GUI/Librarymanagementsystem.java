@@ -11,8 +11,9 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
 
     Font font15 = new Font("Consolas", Font.BOLD, 15);
 
-    JLabel titleLabel, idLabel, nameLabel, descriptionLabel, searchLabel;
+    JLabel titleLabel, idLabel, nameLabel, descriptionLabel, searchLabel, passLabel;
     JTextField idTf, nameTf, descriptionTf, searchTf;
+    JPasswordField passTf;
     JTextArea screen;
 
     // JTextArea display;
@@ -39,6 +40,13 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
 
         idLabel = createLabel(panel, 10, 50, 100, 30, "Book ID");
         idTf = createTextField(panel, 120, 50, 150, 30, "");
+
+        passLabel = createLabel(panel, 300, 50, 100, 30, "Password:");
+        
+        passTf = new JPasswordField();
+        passTf.setBounds(400, 50, 150, 30);
+        passTf.setFont(font15);
+        panel.add(passTf);
 
         nameLabel = createLabel(panel, 10, 90, 100, 30, "Name");
         nameTf = createTextField(panel, 120, 90, 150, 30, "");
@@ -112,22 +120,41 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "ID is empty or already exists!");
             }
         } else if (e.getSource() == updateBtn) {
-            int index = getIndexById(id);
-            if (index != -1) {
-                books[index].setName(name);
-                books[index].setDescription(description);
-                updateScreen();
+            
+            String password = new String(passTf.getPassword());
+
+            if (password.equals("admin")) {
+                int index = getIndexById(id);
+                if (index != -1) {
+                    books[index].setName(name);
+                    books[index].setDescription(description);
+                    updateScreen();
+                    passTf.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Book with ID " + id + " not found!");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Book with ID " + id + " not found!");
+                JOptionPane.showMessageDialog(this, "Access Denied: Wrong Password!");
             }
+
         } else if (e.getSource() == deleteBtn) {
-            int index = getIndexById(id);
-            if (index != -1) {
-                books[index] = null;
-                updateScreen();
+            
+            String password = new String(passTf.getPassword());
+
+            if (password.equals("admin")) {
+                int index = getIndexById(id);
+                if (index != -1) {
+                    books[index] = null;
+                    updateScreen();
+                    passTf.setText(""); 
+                    JOptionPane.showMessageDialog(this, "Deleted Successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Book with ID " + id + " not found!");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Book with ID " + id + " not found!");
+                JOptionPane.showMessageDialog(this, "Access Denied: Wrong Password!");
             }
+
         } else if (e.getSource() == saveBtn) {
             FileIo.saveToFile(books);
             JOptionPane.showMessageDialog(this, "Books saved to file!");
@@ -139,7 +166,8 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
             idTf.setText("");
             nameTf.setText("");
             descriptionTf.setText("");
-            searchTf.setText(""); // Also clear search box
+            searchTf.setText(""); 
+            passTf.setText(""); 
         } else if (e.getSource() == searchBtn) {
             String searchId = searchTf.getText(); 
             int index = getIndexById(searchId);
