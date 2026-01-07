@@ -22,7 +22,7 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
     Book[] books = new Book[100];
 
     public Librarymanagementsystem() {
-        super("Library Management System");
+        super("Student Manager");
         this.setSize(800, 600);
         this.setLocation(200, 50);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +31,7 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 800, 600);
         panel.setLayout(null);
-        panel.setBackground( new Color(219, 112, 147) );
+        panel.setBackground(new Color(230, 230, 250));
         this.add(panel);
 
         FileIo.loadFromFile(books);
@@ -54,16 +54,16 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
         descriptionLabel = createLabel(panel, 10, 130, 100, 30, "Description");
         descriptionTf = createTextField(panel, 120, 130, 150, 30, "");
 
-        addBtn = createButton(panel, 10, 180, 120, 30, "Add",  Color.black);
-        updateBtn = createButton(panel, 140, 180, 120, 30, "Update", Color.black);
-        deleteBtn = createButton(panel, 270, 180, 120, 30, "Delete", Color.black);
+        addBtn = createButton(panel, 10, 180, 120, 30, "Add", new Color(70, 130, 180));
+        updateBtn = createButton(panel, 140, 180, 120, 30, "Update", new Color(34, 139, 34));
+        deleteBtn = createButton(panel, 270, 180, 120, 30, "Delete", new Color(178, 34, 34));
 
-        loadBtn = createButton(panel, 10, 220, 120, 30, "Load",  Color.black);
-        saveBtn = createButton(panel, 140, 220, 120, 30, "Save",  Color.black);
-        clearBtn = createButton(panel, 270, 220, 120, 30, "Clear",  Color.black);
+        loadBtn = createButton(panel, 10, 220, 120, 30, "Load", new Color(72, 61, 139));
+        saveBtn = createButton(panel, 140, 220, 120, 30, "Save", new Color(123, 104, 238));
+        clearBtn = createButton(panel, 270, 220, 120, 30, "Clear", new Color(105, 105, 105));
 
         searchTf = createTextField(panel, 10, 270, 150, 30, "");
-        searchBtn = createButton(panel, 170, 270, 120, 30, "Search",  Color.black);
+        searchBtn = createButton(panel, 170, 270, 120, 30, "Search", new Color(255, 140, 0));
 
         screen = new JTextArea();
         screen.setFont(font15);
@@ -97,7 +97,7 @@ public class Librarymanagementsystem extends JFrame implements ActionListener {
         btn.setBounds(x, y, w, h);
         btn.setFont(font15);
         btn.setBackground(bgColor);
-        btn.setForeground(new Color(199, 21, 133));
+        btn.setForeground(Color.white);
         btn.addActionListener(this);
         panel.add(btn);
         return btn;
